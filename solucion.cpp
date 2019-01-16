@@ -61,10 +61,6 @@ int GetEstado()
                 
             }
             
-             if(tablero[x][2 - x] == 'X'){
-                g_d_d++;
-                
-            }
             
              if(g_h == 3 || g_v == 3 || g_d_i == 3 || g_d_d == 3){
                  status = GANO_X;
