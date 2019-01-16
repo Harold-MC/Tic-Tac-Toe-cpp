@@ -29,37 +29,83 @@ int GetEstado()
     tablero[1][0]
     */
     
-    
-    
     char** tablero = GetTablero();
     
+    int status = JUEGO_EN_CURSO;
+    
     for(int i = 0;i < 3;i++){
-        
+       
         int g_v = 0;
         int g_h = 0;
+        int g_d_d = 0;
+        int g_d_i = 0;
         
-        for(int x = 2;x >= 0;x++){
-            
-            if(tablero[i][x] == 'x'){
+        for(int x = 0;x < 3;x++){
+          
+            if(tablero[i][x] == 'X'){
                 g_h++;
-                
-                if(g_h == 3){  //intentr sacar este if por si no funciona
-                   return GANO_X;
-                }
+ 
             }
             
-            if(tablero[x][i] == 'x'){
-                g_h++;
-                
-                if(g_h == 3){  //intentr sacar este if por si no funciona
-                   return GANO_X;
-                }
+            if(tablero[x][i] == 'X'){
+                g_v++;
             }
             
+            if(tablero[i][2 - x] == 'X'){
+                g_d_d++;
+                
+            }
             
+            if(tablero[x][x] == 'X'){
+                g_d_i++;
+                
+            }
+            
+             if(tablero[x][2 - x] == 'X'){
+                g_d_d++;
+                
+            }
+            
+             if(g_h == 3 || g_v == 3 || g_d_i == 3 || g_d_d == 3){
+                 status = GANO_X;
+            }
+  
+        }
+        
+        g_v = 0;
+        g_h = 0;
+        g_d_d = 0;
+        g_d_i = 0;
+        
+        for(int y = 0;y < 3; y++){
+            
+            if(tablero[i][y] == 'O'){
+                g_h++;
+    
+            }
+            
+            if(tablero[y][i] == 'O'){
+                g_v++;
+     
+            }
+            
+             if(tablero[y][y] == 'O'){
+                g_d_i++;
+                
+            }
+            
+             if(tablero[y][2 - y] == 'O'){
+                g_d_d++;
+                
+            }
+            
+             if(g_h == 3 || g_v == 3 || g_d_i == 3 || g_d_d == 3){
+                 status = GANO_O;
+            }
             
         }
     }
+    return status;
+    
 
-    return JUEGO_EN_CURSO;
 }
